@@ -1,0 +1,7 @@
+.workspace-config.json
+.ipynb_checkpoints
+.tempfile
+.DS_Store
+node_modules
+build
+.env
