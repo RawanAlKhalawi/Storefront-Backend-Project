@@ -80,7 +80,7 @@ curl --location --request POST 'localhost:5000/users' \
 ## Test application
 `yarn test`
 
-<img width="589" alt="Screen Shot 2021-08-19 at 12 03 44 AM" src="https://user-images.githubusercontent.com/46426188/129971911-f8583a69-bfcb-432e-a472-6d4ed4beb3de.png">
+<img width="505" alt="Screen Shot 2021-08-19 at 12 31 36 AM" src="https://user-images.githubusercontent.com/46426188/129975011-e1a93b94-b23c-4f40-b29e-f19464c1b19c.png">
 
 ## Endpoints 
 [REQUIREMENTS.md](REQUIREMENTS.md).
