@@ -35,10 +35,21 @@ curl --location --request POST 'localhost:5000/auth' \
 #### Orders
 - Current Order `GET /orders/:id` [token required]
 - Index `GET /orders` [token required]
-- Update `PUT /orders/:id` [token required]
 - Create `POST /orders` [token required]
-- Delete `DELETE /orders/:id` [token required]
 
+#### Order_Products
+- Update `PUT /orders/:id/products` [token required]
+- Delete `DELETE /orders/:id/products` [token required]
+- Add Product `POST /orders/:id/products` [token required]
+```
+curl --location --request DELETE 'localhost:5000/orders/1/products' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJmaXJzdF9uYW1lIjoicmF3YW4iLCJsYXN0X25hbWUiOiJhbGtoYWxhd2kiLCJ1c2VybmFtZSI6InJhd2FuIiwicGFzc3dvcmQiOiIkMmIkMTAkOE9UOS9NQVM1RlNOcEV1NThjSjBzLnN4Und5cmFLcTlCWjJLUVFnMHlnMnRPdjZVNXVTcksifSwiaWF0IjoxNjI5MjU4MTMwfQ.V4w4zeJUfK75wpZ-eity2vIkgZ1wV9_6Yccn8vuKm7w' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "quantity": 3,
+    "product_id": "1"
+}'
+```
 ## Data Shapes
 #### Product
 -  id
@@ -54,10 +65,14 @@ curl --location --request POST 'localhost:5000/auth' \
 
 #### Orders
 - id
-- product_id of each product in the order
-- quantity of each product in the order
 - user_id
 - status of order (active or complete)
+
+#### Order_Products
+- id
+- quantity of each product in the order
+- product_id of each product in the order
+- order_id
 
 ## Database Schema
 ```
@@ -77,10 +92,13 @@ CREATE TABLE products (
 CREATE TYPE status_order AS ENUM ('active', 'complete');
 CREATE TABLE orders (
     id serial PRIMARY KEY,
-    quantity integer,
     status status_order,
-    user_id bigint REFERENCES users(id),
+    user_id bigint REFERENCES users(id)
+);
+CREATE TABLE order_products (
+    id SERIAL PRIMARY KEY,
+    quantity integer,
+    order_id bigint REFERENCES orders(id),
     product_id bigint REFERENCES products(id)
 );
-
 ```

@@ -7,7 +7,7 @@ const request = supertest(app);
 const userStore = new UserStore();
 let token: string;
 
-describe('Test order endpoints', () => {
+describe('Test Order Poducts endpoints', () => {
     beforeAll(async () => {
 
         await userStore.create({
@@ -31,34 +31,43 @@ describe('Test order endpoints', () => {
                 price: 25,
                 category: 'book',
             });
-    });
-    it('should add a order', async (done) => {
-        const response = await request
+
+        await request
             .post('/orders')
             .set('Authorization', 'Bearer ' + token)
             .send({
-                status: OrderStatus.active,
+                status: OrderStatus.complete,
                 user_id: 1,
+            });
+    });
+    it('should add a order_products', async (done) => {
+        const response = await request
+            .post('/orders/1/products')
+            .set('Authorization', 'Bearer ' + token)
+            .send({
+                "quantity": 3,
+                "product_id": "1"
             });
         expect(response.status).toBe(200);
         done();
     });
 
-    it('should return a list of orders', async (done) => {
+    it('should update the order_products', async (done) => {
         const response = await request
-            .get('/orders')
+            .put('/orders/1/products')
+            .send({
+                quantity: 6,
+            })
             .set('Authorization', 'Bearer ' + token);
         expect(response.status).toBe(200);
         done();
     });
 
-    it('should return the current orders', async (done) => {
+    it('should delete the order_products', async (done) => {
         const response = await request
-            .get('/orders/1')
+            .delete('/orders/1/products')
             .set('Authorization', 'Bearer ' + token);
         expect(response.status).toBe(200);
         done();
     });
-
-
 });
