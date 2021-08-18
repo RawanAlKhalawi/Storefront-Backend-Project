@@ -28,6 +28,7 @@ TOKEN_SECRET=token-secret
 ````
 
 ## Instructions to setup the database
+### docker
 `docker-compose up` 
 
 `db-migrate up`
@@ -44,6 +45,18 @@ need to create test database.
 
 `\c store_dev`
 
+### via sql query
+
+`CREATE USER postgres WITH PASSWORD 'password';`
+
+`CREATE DATABASE store_dev;`
+
+`CREATE DATABASE store_test;`
+
+```sh
+GRANT ALL PRIVILEGES ON DATABASE store_dev TO postgres;
+GRANT ALL PRIVILEGES ON DATABASE store_test TO postgres;
+```
 to create a user by endpoint 
 need to add role = admin in the header
 

@@ -8,7 +8,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - Index `GET /products`
 - Show `GET /products/:id`
 - Create `POST /products` [token required]
-```curl
+```
 curl --location --request POST 'localhost:5000/products' \
 --header 'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InBhc3N3b3JkIjoiJDJiJDEwJFlxNHFiYzRJOUo5Sy50VEZRbzhvTXVva2pGdVZwR0xUWW5vQjlkNVNnTUlVbGdaN29NMFRtIn0sImlhdCI6MTYyOTE1NTE4NH0.mCfs_SAok1GU5iCen4VWLBmkX1-kNerNuXRS5dI7O2k' \
 --header 'Content-Type: application/json' \
@@ -23,7 +23,7 @@ curl --location --request POST 'localhost:5000/products' \
 - Show `GET /users/:id` [token required]
 - Create `POST /users` [token required unless the admin ]
 - authenticate `POST /auth`
-```curl
+```
 curl --location --request POST 'localhost:5000/auth' \
 --header 'Content-Type: application/json' \
 --data-raw '{
