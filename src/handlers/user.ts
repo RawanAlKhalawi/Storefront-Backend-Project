@@ -34,14 +34,17 @@ const show = async (req: Request, res: Response) => {
 };
 
 const create = async (req: Request, res: Response) => {
-  try {
-    const authorizationHeader = req.headers.authorization as string;
-    const token = authorizationHeader.split(' ')[1];
-    jwt.verify(token, tokenSecret);
-  } catch (err) {
-    res.status(401);
-    res.json('Access denied, invalid token');
-    return;
+  const role = req.headers.role as string;
+  if (role != 'admin') {
+    try {
+      const authorizationHeader = req.headers.authorization as string;
+      const token = authorizationHeader.split(' ')[1];
+      jwt.verify(token, tokenSecret);
+    } catch (err) {
+      res.status(401);
+      res.json('Access denied, invalid token');
+      return;
+    }
   }
   const user: User = {
     firstName: req.body.first_name,

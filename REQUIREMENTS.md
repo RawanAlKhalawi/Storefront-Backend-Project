@@ -21,7 +21,7 @@ curl --location --request POST 'localhost:5000/products' \
 #### Users
 - Index `GET /users` [token required]
 - Show `GET /users/:id` [token required]
-- Create `POST /users` [token required]
+- Create `POST /users` [token required unless the admin ]
 - authenticate `POST /auth`
 ```curl
 curl --location --request POST 'localhost:5000/auth' \
