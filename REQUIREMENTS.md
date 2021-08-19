@@ -61,6 +61,7 @@ curl --location --request DELETE 'localhost:5000/orders/1/products' \
 - id
 - firstName
 - lastName
+- username
 - password
 
 #### Orders
